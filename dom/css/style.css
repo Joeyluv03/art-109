@@ -1,0 +1,43 @@
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+ }
+ 
+ 
+ *,
+ *:before,
+ *:after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+ }
+ 
+ 
+ html,
+ body {
+    height: 100%;
+ }
+ 
+ 
+ body {
+     font-size: 1.6rem;
+    /* font-size 1.6rem is now the same as 16px */
+    line-height: 1.6;
+ }
+ 
+ header {
+    padding: 50px;
+    background-color: rgb(222, 236, 248);
+    text-align: center;
+ }
+
+ main {
+
+ }
+
+ .img-div {
+    display: inline-block;
+ }
+
+ 
