@@ -76,8 +76,8 @@ function init() {
         
         //load + play animation
         const clipSwim = new THREE.AnimationClip.findByName(clips, 'fishAction');
-        const action = mixer.clipAction(clipSwim);
-        action.play();
+        const actionSwim = mixer.clipAction(clipSwim);
+        actionSwim.play();
 
         clips.forEach(function (clipSwim) {
             const action = mixer.clipAction(clipSwim);
