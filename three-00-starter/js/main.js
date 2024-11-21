@@ -7,7 +7,10 @@ import { GLTFLoader } from 'https://unpkg.com/three@0.162.0/examples/jsm/loaders
 
 //~~~~~~~~~~~~~~~~global variables~~~~~~~~~~~~~~~~
 let scene, camera, renderer, ball, fish, mixer;
-let sceneContainer = document.querySelector("scene-container");
+let sceneContainer = document.querySelector("#scene-container");
+
+//animation variables
+let actionSwim;
 
 // ~~~~~~~~~~~~~~~~Create scene here~~~~~~~~~~~~~~~~
 function init() {
@@ -20,11 +23,15 @@ function init() {
 
     camera = new THREE.PerspectiveCamera(75, sceneContainer.clientWidth / sceneContainer.clientHeight, 0.1, 1000);
 
+   
+
     // ~~~~~~~~~~~~~~~~Rendering~~~~~~~~~~~~~~~~
 
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(sceneContainer.clientWidth, sceneContainer.clientHeight);
-    sceneContainer.appendChild(renderer.domElement);
+
+    document.querySelector('#scene-container').appendChild(renderer.domElement); //adds scene to div container
+    //sceneContainer.appendChild(renderer.domElement);// adds scene to main HTML body
     renderer.setAnimationLoop(animate);
 
     // ~~~~~~~~~~~~~~~~Add Lights(Right)~~~~~~~~~~~~~~~~
@@ -55,12 +62,12 @@ function init() {
 
 
     // ~~~~~~~~~~~~~~~~Geometry~~~~~~~~~~~~~~~~
-    const geometry = new THREE.SphereGeometry(.2, 32, 16);
+    const geometry = new THREE.SphereGeometry(.3, 32, 16);
 
     const texture = new THREE.TextureLoader().load('texture/ice.jpg');
     const material = new THREE.MeshStandardMaterial({ map: texture });
 
-    ball = new THREE.Mesh(geometry, material);
+    //ball = new THREE.Mesh(geometry, material);
     scene.add(ball);
 
     //load 3d model
@@ -76,20 +83,47 @@ function init() {
         
         //load + play animation
         const clipSwim = new THREE.AnimationClip.findByName(clips, 'fishAction');
-        const actionSwim = mixer.clipAction(clipSwim);
+        actionSwim = mixer.clipAction(clipSwim);
         actionSwim.play();
 
         clips.forEach(function (clipSwim) {
-            const action = mixer.clipAction(clipSwim);
+            action = mixer.clipAction(clipSwim);
             action.play();
         });
 
     })
-
-    //camera position
-    camera.position.z = 5;
+     //camera position
+     camera.position.z = 15;
 }
 
+
+// ~~~~~~~~~~~~~~~~ Mouse Events ~~~~~~~~~~~~~~~~
+
+let mouseDown = false;
+
+// ~~~~~~~~~~~~~~~~Event Listeners~~~~~~~~~~~~~~~~
+document.querySelector("#scene-container").addEventListener("mousedown", () => {
+    console.log("mousedown")
+    mouseDown = true;
+    actionSwim.play();
+    actionSwim.paused = false;
+
+})
+document.querySelector('#scene-container').addEventListener('mouseup', () => {
+    console.log("mouse released");
+    mouseDown = false;
+    actionSwim.paused = true;
+
+});
+
+document.querySelector('#scene-container').addEventListener('mousemove', (e) => {
+    if (mouseDown) {
+        console.log("dragged");
+        ball.rotation.x += .5;
+    }
+});
+
+// ~~~~~~~~~~~~~~~~ Animation Loop ~~~~~~~~~~~~~~~~
 
 const clock = new THREE.Clock();
 
@@ -105,17 +139,11 @@ function animate() {
     ball.position.z = Math.sin(Date.now() / 4000) * 2;
 
     if (fish) {
-        //fish.rotation.x += 0.007;
-        // fish.rotation.y += 0.007;
-        
         // animation mixer update
         mixer.update(clock.getDelta());
 
         fish.rotation.y = Math.sin(Date.now() / 500) * 2;
     }
-
-    if (mixer)
-        mixer.update(clock.getDelta());
 
     renderer.render(scene, camera);
 
@@ -124,15 +152,15 @@ function animate() {
 
 
 function onWindowResize() {
-    camera.aspect = sceneContainer.clientWidth / sceneContainer.clientHeight;
-    camera.updateProjectMatrix();
-    renderer.setSize(sceneContainer.clientWidth, sceneContainer.clientHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
 
 }
 
 window.addEventListener('resize', onWindowResize, false);
 
-init();
-animate();
+init(); // execute initialize function
+animate(); // execute animation function
 
 
