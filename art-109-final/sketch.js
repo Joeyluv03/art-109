@@ -49,7 +49,7 @@ let cnv  =  createCanvas(600, 800);
     // ... but needed if showNextScene() is used.
     mgr.addScene (intro);
     mgr.addScene (scene2);
-    // mgr.addScene (finish);
+    // mgr.addScene (scene3);
     mgr.addScene (help);
     mgr.addScene (info);
     mgr.showNextScene();
