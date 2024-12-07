@@ -25,10 +25,6 @@ function preload() {
 }
 
 
-// define your p5.play sprites as global objects first.
-var ghosty;
-
-
 // global manager object
 var mgr;
 

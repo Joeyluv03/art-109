@@ -1,0 +1,30 @@
+html {
+    background-color: #bb496f;
+    display: flex;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    /* padding: 0;  */
+    /* margin-right: auto;
+    margin-left: auto;
+    margin-top: 0px;
+    margin-bottom: 50px; Adjust the bottom margin here */
+
+    /* background-color: #bb496f; */
+}
+h1 { 
+    color:rgb(255, 255, 255);
+    font-size: 20px;
+ }
+
+p { 
+    color:rgb(255, 255, 255);
+}
+

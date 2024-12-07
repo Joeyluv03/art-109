@@ -11,13 +11,12 @@
 function intro()  {
 
     var playButton;
+   // var dressupButton;
     var helpButton;
-    var infoButton;
+    var infoButton;  
     
- 
-
     this.setup = function() {
-      console.log("We are at setup for scene1");
+      console.log("Setup for scene1");
       // do all stuff you want to initialize things,
       // as this it need to be called only once.
 
@@ -100,6 +99,43 @@ function intro()  {
    });
 
 
+   // dressupButton = new Button({
+   //    x: 495,	y: 760,
+   //    width: 180,		height: 50,
+   //    align_x: 0,		align_y: 0,
+   //    content: 'My Dress Up',
+   //    style_default: {
+   //       color: '#fff',
+   //       background: '#f56998',
+   //       text_size: 36,
+   //       text_font: loadFont('assets/heart-font.ttf'),
+   //       border_width: 0,
+   //       border_color: '',
+   //       border_radius: 5
+          
+   //    },
+
+   //    style_pressed: {
+   //       color: '#fff',
+   //       background: '#ffcea6',
+   //       text_size: 36,
+   //       text_font:  loadFont('assets/heart-font.ttf'),
+   //       border_width: 0,
+   //       border_color: '',
+   //       border_radius: 5
+   //    },
+   //    on_press() {
+   //       //mgr.showScene('scene2', true);
+   //       mgr.open('#', '_blank', true);
+   //       playclick();
+   //    },
+
+   //    style_hover: {
+   //      background: '#f2b6cd',
+   //      color: '#111',
+   //    },
+   // });
+
    infoButton = new Button({
     x: 40,	y: 760,
     width: 50,		height: 50,
@@ -145,13 +181,8 @@ function intro()  {
     // enter() will be called each time SceneManager switches
     // to this scene
     this.enter = function()  {
-        console.log("We are at entering scene1");
-        // textX = 10;
-        // textY = 0;
-
-      // loy = 100;
-     // background("red");
-
+        console.log("scene1");
+     
     }
 
     this.draw = function()
@@ -165,6 +196,7 @@ function intro()  {
         fill(255);
 
         playButton.draw();
+        //dressupButton.draw();
         helpButton.draw();
         infoButton.draw();
 
@@ -174,7 +206,7 @@ function intro()  {
         translate(width/2,height/2);
         fill(240, 110, 160);
         textSize(90);
-        text("My Dress Up", 0, -140);
+        text("My Makeup", 0, -140);
         
       
         pop();
@@ -208,10 +240,9 @@ function intro()  {
 function scene2()  {
 
   let hairdown;
-  let halfup;
-  let bun;
-  let ponytail;
-  let beanie;
+  let buns;
+  let straight;
+  let highBun;
   
   let currentImage;
   let currentImage2;
@@ -233,15 +264,17 @@ function scene2()  {
       background(0);
       console.log("We are at setup for scene2");
     
-      body = loadImage("assets/body.png");
+      //set up for me and the bg
+      bg2 = loadImage("assets/makeup-room.jpg");
+      tank = loadImage("assets/tank.png");
+   
+      //Hair
+      hairdown = loadImage("assets/hair-down.png");
+      buns = loadImage("assets/buns.png");
+      straight = loadImage("assets/straight-hair.png")
+      highBun = loadImage("assets/high-bun.png")
+      currentImage = loadImage("assets/high-bun.png");
 
-      //hair
-      hairdown = loadImage("assets/hairdown.png");
-      halfup = loadImage("assets/halfup.png");
-      bun = loadImage("assets/bun.png");
-      ponytail = loadImage("assets/ponytail.png");
-      beanie = loadImage("assets/beanie.png");
-      currentImage = loadImage("assets/hairdown.png");
 
       //tops
       currentImage2 = loadImage("assets/blacktube.png");
@@ -655,18 +688,21 @@ function scene2()  {
 
 
       background(0);
-      image(bg, 0, 0, width, height);
+      image(bg2, 0, 0, width, height);
+      image(tank, 0, 0, width, height);
+
+
       
-      image(body, 0, 0, width, height);
+
 
       //image(hairdown, 0, 0, width, height);
-      // Draw the current hairstyle image
+     // Draw the current hairstyle image
      image(currentImage, 0, 0, width, height);
-     //shoes
+    // shoes
      image(currentImage4, 0, 0, width, height);
-      //bottoms
+     // bottoms
      image(currentImage3, 0, 0, width, height);
-      //tops
+    //  tops
      image(currentImage2, 0, 0, width, height);
 
 
@@ -832,11 +868,8 @@ function help()  {
 
 
   this.setup = function() {
-    console.log("We are at setup for scene1");
-    // do all stuff you want to initialize things,
-    // as this it need to be called only once.
+   //  console.log("We are at setup for scene1");
 
-   
     textAlign(CENTER);
     textSize(29);
   
